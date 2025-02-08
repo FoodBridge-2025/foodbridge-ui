@@ -1,15 +1,19 @@
-import './App.css';
+import { useState } from "react";
+
 import FoodRequestForm from './components/FoodRequestForm';
 import Navbar from './components/Navbar';
-import Donations from './components/pages/Donations.jsx';
-import FoodRequest from './components/ui/FoodRequest';
-import { useState } from "react";
+import Donations from './components/pages/Donations';
+import FoodRequests from './components/pages/FoodRequests';
+
+import { dummyFoodRequests, dummyDonations } from './dummyrequests';
 
 function App() {
   const [page, setPage] = useState("FoodRequestForm");
+  const [selectedRequestId, setSelectedRequestId] = useState(null);
 
-  function updatePage(newPage) {
+  function updatePage(newPage, requestId = null) {
     setPage(newPage)
+    setSelectedRequestId(requestId);
   }
 
   function renderPage() {
@@ -21,11 +25,15 @@ function App() {
       )
     } else if (page === "FoodRequestList") {
       return (
-        <FoodRequest />
+        <FoodRequests foodRequests={dummyFoodRequests} updatePage={updatePage} />
       )
     } else if (page === "Donations") {
+      const foodRequest = dummyFoodRequests.find(request => request.id === selectedRequestId);
+      const donations = dummyDonations.filter(donation => donation.requestId === selectedRequestId);
+      console.log(`Loading donations`);
+      console.log(donations)
       return (
-        <Donations />
+        <Donations donations={donations} foodReq={foodRequest} updatePage={updatePage} />
       )
     }
     return null;

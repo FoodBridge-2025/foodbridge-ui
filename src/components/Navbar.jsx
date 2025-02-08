@@ -30,9 +30,6 @@ export default function Navbar({ curpage, updatePage }) {
             <li className="nav-item">
               <a className={`nav-link ${curpage === "FoodRequestList" ? "active" : ""}`} onClick={() => updatePage("FoodRequestList")} aria-current="page" href="#">Active Food Requests</a>
             </li>
-            <li className="nav-item">
-              <a className={`nav-link ${curpage === "Donations" ? "active" : ""}`} onClick={() => updatePage("Donations")} href="#">Donations</a>
-            </li>
           </ul>
         </div>
       </div>

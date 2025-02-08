@@ -10,7 +10,7 @@ export default function FoodRequestForm() {
         <form onSubmit={addElem}>
           <div className="mb-3">
             <h6 className="card-subtitle mb-2 text-body-secondary">
-              How many do you anticipate serving?
+              How many people do you anticipate serving?
             </h6>
             <input
               type="number"
