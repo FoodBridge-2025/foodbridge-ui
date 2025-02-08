@@ -1,0 +1,46 @@
+body {
+  background-color: #E2DED6;
+  color: #14332E;
+  margin: 0px;
+  padding: 0px;
+}
+
+#foodbridgenav {
+  background-color: #ACE1AF;
+  padding: 0.75rem;
+  margin: 0px;
+  width: 100%;
+}
+
+.navbar {
+  padding: 0px;
+}
+
+.card {
+  background-color: #ACE1AF;
+  border: solid 1px #e68930;
+  margin: 0 auto;
+  padding: 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.card a {
+  color: #e68930;
+}
+
+.card a:hover {
+  color: orange;
+}
+
+.food-request-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 56px);
+  /* Adjust height based on the Navbar height */
+}
+
+.card * {
+  padding: .25rem;
+}
