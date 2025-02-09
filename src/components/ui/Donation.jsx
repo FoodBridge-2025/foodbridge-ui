@@ -1,5 +1,10 @@
 export default function Donation({ donation, updatePage }) {
 
+  function confirmReceipt() {
+    // indicate to backend that the item was received
+    updatePage("Review", null, donation.id)
+  }
+
   function handleStatus() {
     if (donation.status === "Pending") {
       return (
@@ -15,7 +20,7 @@ export default function Donation({ donation, updatePage }) {
     } else if (donation.status === "In-transit") {
       return (
         <>
-          <button type="submit" className="btn btn-primary">
+          <button onClick={confirmReceipt} type="submit" className="btn btn-primary">
             Confirm receipt
           </button>
           <button type="submit" className="btn btn-danger">

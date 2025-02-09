@@ -1,4 +1,5 @@
 import Donation from '../ui/Donation'
+import { API_URL } from '../../App';
 
 export default function Donations({ foodReq, donations, updatePage }) {
   console.log(`Viewing donations for the following food request: ${foodReq}`);

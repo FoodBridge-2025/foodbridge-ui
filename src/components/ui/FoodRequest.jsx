@@ -22,7 +22,6 @@ export default function FoodRequest({ foodReq, updatePage }) {
         <p className="card-text">
           <strong>Type:</strong> {foodReq.meal_type} <br />
           <strong>Servings:</strong> {foodReq.no_servings} <br />
-          <strong>Status:</strong> <span className={`badge ${foodReq.status === "Fulfilled" ? "bg-success" : "bg-warning"}`}>{foodReq.status}</span>
         </p>
       </div>
     </div>

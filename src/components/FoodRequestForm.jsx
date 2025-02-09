@@ -1,13 +1,37 @@
-// Will we need any props?
-export default function FoodRequestForm() {
-  function addElem() {
-    return;
+import { API_URL } from '../App';
+
+export default function FoodRequestForm({ orgId, updatePage }) {
+  async function addElem(formData) {
+
+    console.log(formData);
+    const reqBody = {
+      community_centre_id: orgId,
+      servings: formData.get("no-serving"),
+      date: formData.get("when"),
+      meal_type: formData.get("meal-time"),
+      status: "Open"
+    }
+    console.log(reqBody);
+    try {
+      const response = await fetch(`${API_URL}/requirements/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reqBody)
+      });
+      const data = await response.json();
+      console.log(data);
+      updatePage("FoodRequestList")
+    } catch {
+
+    }
   }
   return (
     <div className="card mx-auto" style={{ maxWidth: "60rem" }}>
       <div className="card-body">
         <h5 className="card-title mb-4">What are your food needs?</h5>
-        <form onSubmit={addElem}>
+        <form action={addElem}>
           <div className="mb-3">
             <h6 className="card-subtitle mb-2 text-body-secondary">
               How many people do you anticipate serving?

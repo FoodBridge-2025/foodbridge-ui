@@ -32,6 +32,10 @@ export default function Navbar({ curpage, updatePage }) {
             </li>
           </ul>
         </div>
+        <form className="d-flex" role="search">
+          <a href="" >Logout</a>
+        </form>
+
       </div>
     </nav>
   )
