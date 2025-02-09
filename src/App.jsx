@@ -13,14 +13,14 @@ export const API_URL = import.meta.env.VITE_API_URL;
 
 function App() {
   const [page, setPage] = useState("FoodRequestForm");
-  const [selectedRequestId, setSelectedRequestId] = useState(null);
+  const [selectedFoodRequest, setSelectedFoodRequest] = useState(null);
   const [selectedDonationId, setSelectedDonationId] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [orgId, setOrgId] = useState("")
 
-  function updatePage(newPage, requestId = null, donationId = null) {
+  function updatePage(newPage, foodRequest = null, donationId = null) {
     setPage(newPage)
-    setSelectedRequestId(requestId);
+    setSelectedFoodRequest(foodRequest);
     setSelectedDonationId(donationId);
   }
 
@@ -49,12 +49,11 @@ function App() {
         <FoodRequests orgId={orgId} foodRequests={dummyFoodRequests} updatePage={updatePage} />
       )
     } else if (page === "Donations") {
-      const foodRequest = dummyFoodRequests.find(request => request.id === selectedRequestId);
-      const donations = dummyDonations.filter(donation => donation.requestId === selectedRequestId);
+      // const donations = dummyDonations.filter(donation => donation.requestId === selectedFoodRequest.id);
       console.log(`Loading donations`);
-      console.log(donations)
+      // console.log(donations)
       return (
-        <Donations donations={donations} foodReq={foodRequest} updatePage={updatePage} />
+        <Donations /*donations={donations}*/ foodReq={selectedFoodRequest} updatePage={updatePage} />
       )
     } else if (page === "Review") {
       const donation = dummyDonations.filter(donation => donation.id === selectedDonationId);

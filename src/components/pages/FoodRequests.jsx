@@ -15,12 +15,17 @@ export default function FoodRequests({ orgId, foodRequests, updatePage }) {
         console.log(`orgId: ${orgId}`)
         const fetchUrl = `${API_URL}/requests/${orgId}`
         console.log(fetchUrl);
-        const response = await fetch(`${API_URL}/requests/${orgId}`);
-        console.log(response);
-        /*const foodReqs = await response.json();
-        console.log("json'd");
-        console.log(foodReqs);
-        setRequests(foodReqs);*/
+        const response = await fetch(`${API_URL}/requests/${orgId}`, {
+          method: "GET",
+          headers: {
+            "ngrok-skip-browser-warning": "True"
+          }
+        });
+
+        const foodReqs = await response.json();
+        console.log("Showing food requirement");
+        setRequests(foodReqs);
+        console.log("Showing updated state");
       } catch (error) {
         console.error(error);
       }
@@ -28,6 +33,10 @@ export default function FoodRequests({ orgId, foodRequests, updatePage }) {
 
     fetchRequests();
   }, [orgId]); // Re-fetch when orgId changes
+
+  useEffect(() => {
+    console.log("Updated requests:", requests);
+  }, [requests]);
 
   /*const requests = getRequests().map(foodReq => {
     <FoodRequest
@@ -44,7 +53,7 @@ export default function FoodRequests({ orgId, foodRequests, updatePage }) {
         <FoodRequest
           key={foodReq.id}
           foodReq={foodReq}
-          updatePage={updatePage}
+          updatePage={() => updatePage("Donations", foodReq)}
         />
       ))}
     </>

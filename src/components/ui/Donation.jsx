@@ -1,4 +1,5 @@
 export default function Donation({ donation, updatePage }) {
+  console.log(donation);
 
   function confirmReceipt() {
     // indicate to backend that the item was received
@@ -6,7 +7,7 @@ export default function Donation({ donation, updatePage }) {
   }
 
   function handleStatus() {
-    if (donation.status === "Pending") {
+    if (donation.status === "Open") {
       return (
         <>
           <button type="submit" className="btn btn-success">

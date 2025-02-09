@@ -15,13 +15,15 @@ export default function FoodRequest({ foodReq, updatePage }) {
     updatePage("Donations", foodReq.id);
   }
 
+  console.log(foodReq)
+
   return (
     <div className="card mx-auto mb-3 foodrequest">
       <div className="card-body" onClick={viewDonations}>
-        <h5 className="card-title">{formatDate(foodReq.date)}</h5>
+        <h5 className="card-title">{foodReq.date}</h5>
         <p className="card-text">
           <strong>Type:</strong> {foodReq.meal_type} <br />
-          <strong>Servings:</strong> {foodReq.no_servings} <br />
+          <strong>Servings:</strong> {foodReq.servings} <br />
         </p>
       </div>
     </div>
