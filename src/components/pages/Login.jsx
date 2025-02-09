@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { API_URL } from '../../App';
 const OPENSTREETMAP_URL = import.meta.env.VITE_OSM_URL;
+const MODEL = import.meta.env.VITE_KAUSHAL_API_URL;
 
 function Signup({ handleSignup }) {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ function Signup({ handleSignup }) {
     phoneNumber: '',
     logo: null
   });
+  const [link, setLink] = useState('');
   const [previewUrl, setPreviewUrl] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -75,6 +77,29 @@ function Signup({ handleSignup }) {
       setPreviewUrl(url);
     }
   };
+
+  const handleLinkChange = (e) => {
+    setLink(e.target.value);
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (link) {
+        const response = await fetch(`${MODEL}/autofill?link=${link}`);
+        const autofillData = await response.json();
+        const { operationalDays, operationalHours, pantryAddress, pantryName, pantryPhoneNumber } = autofillData;
+
+        setFormData({
+          ...formData,
+          institutionName: pantryName,
+          address: pantryAddress,
+          phoneNumber: pantryPhoneNumber
+        });
+        return autofillData
+      }
+    }
+    fetchData();
+  }, [link]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -156,6 +181,18 @@ function Signup({ handleSignup }) {
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          name="link"
+          placeholder="Autofill the form with your institution's website link"
+          value={link}
+          onChange={handleLinkChange}
           required
         />
       </div>

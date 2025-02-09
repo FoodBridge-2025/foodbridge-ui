@@ -10,6 +10,7 @@ import Login from './components//pages/Login'
 import { dummyFoodRequests, dummyDonations } from './dummyrequests';
 
 export const API_URL = import.meta.env.VITE_API_URL;
+export const KAUSHAL_API_URL = import.meta.env.VITE_KAUSHAL_API_URL;
 
 function App() {
   const [page, setPage] = useState("FoodRequestForm");
