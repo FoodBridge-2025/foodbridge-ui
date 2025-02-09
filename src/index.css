@@ -55,3 +55,50 @@ a:hover {
   flex-direction: column;
   align-items: center;
 }
+
+.visible {
+  display: block;
+}
+
+.invisible {
+  display: none;
+}
+
+.chat {
+  position: absolute;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+  background-color: #ACE1AF;
+  border: 2px solid #14332E;
+}
+
+.chat-icon {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  border-radius: 100%;
+  background-color: #ACE1AF;
+  color: #182928;
+  height: 100px;
+  width: 100px;
+}
+
+.chat-icon-p {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.chat-icon:hover {
+  background-color: #e68930;
+  color: #ACE1AF;
+  cursor: pointer;;
+}
