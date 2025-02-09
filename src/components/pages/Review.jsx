@@ -1,14 +1,54 @@
 import { useState } from 'react';
+import {API_URL} from "../../App.jsx";
 
-export default function Review() {
+export default function Review({userId, updatePage}) {
   const [ratings, setRatings] = useState({
     nutrition: 3,
     timeliness: 3,
     quantity: 3
   });
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+
+// Calculate the sum of the values
+    const sum = Object.values(ratings)
+        .map(value => parseInt(value, 10)) // Convert each value to an integer
+        .reduce((acc, value) => acc + value, 0)
+// Multiply the sum by 5
+    const result = sum * 5;
+    console.log(sum);
+    const fetchUrl = `${API_URL}/users/${userId}/token_count`;
+
+    try {
+      // Step 1: Fetch the current token_count
+      const response = await fetch(fetchUrl, {
+        headers: {
+          "ngrok-skip-browser-warning": "True"
+        }
+      });
+      const data = await response.json(); // Assuming the response contains the current token_count in the body
+
+      const currentTokenCount = data; // Adjust this based on the actual response structure
+
+      // Step 2: Add the result to the current token_count
+      const updatedTokenCount = currentTokenCount + result;
+
+      // Step 3: Make a PUT request to update the token_count
+      const updateResponse = await fetch(`${fetchUrl}?token_count=${parseInt(updatedTokenCount)}`, {
+        method: "PUT"
+      });
+
+      if (updateResponse.ok) {
+        console.log("Token count updated successfully");
+      } else {
+        console.log("Failed to update token count");
+      }
+
+    } catch (error) {
+      console.error("Error fetching or updating token count:", error);
+    }
+    updatePage("FoodRequestForm", null, null)
     console.log("Submitted ratings:", ratings);
   }
 

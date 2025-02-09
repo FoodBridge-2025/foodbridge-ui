@@ -14,14 +14,14 @@ export const API_URL = import.meta.env.VITE_API_URL;
 function App() {
   const [page, setPage] = useState("FoodRequestForm");
   const [selectedFoodRequest, setSelectedFoodRequest] = useState(null);
-  const [selectedDonationId, setSelectedDonationId] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [orgId, setOrgId] = useState("")
 
-  function updatePage(newPage, foodRequest = null, donationId = null) {
+  function updatePage(newPage, foodRequest = null, userId = null) {
     setPage(newPage)
     setSelectedFoodRequest(foodRequest);
-    setSelectedDonationId(donationId);
+    setUserId(userId);
   }
 
   function handleLogin(data) {
@@ -56,9 +56,8 @@ function App() {
         <Donations /*donations={donations}*/ foodReq={selectedFoodRequest} updatePage={updatePage} />
       )
     } else if (page === "Review") {
-      const donation = dummyDonations.filter(donation => donation.id === selectedDonationId);
       return (
-        <Review donation={donation} updatePage={updatePage} />
+        <Review  updatePage={updatePage} userId={userId} />
       )
     }
     return null;
